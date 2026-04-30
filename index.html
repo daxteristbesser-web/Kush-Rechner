@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kush Rechner & Auto Tuning Rechner</title>
+    <style>
+        body {
+            background-color: black;
+            color: #00FF00;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        #header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        #header .logo {
+            font-size: 30px;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .code-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://your-matrix-style-background-image.jpg') repeat;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        .tabs {
+            margin: 20px 0;
+        }
+        .tab {
+            display: inline-block;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid #00FF00;
+            background-color: transparent;
+        }
+        .active {
+            background-color: #00FF00;
+            color: black;
+        }
+        .section {
+            display: none;
+            padding: 20px;
+        }
+        .section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <div class="logo">&gt;KUSH_</div>
+        <div class="code-background"></div>
+    </div>
+    <div class="tabs">
+        <div class="tab active" onclick="switchTab('kushRechner')">Kush Rechner</div>
+        <div class="tab" onclick="switchTab('autoTuningRechner')">Auto Tuning Rechner</div>
+    </div>
+    <div id="kushRechner" class="section active">
+        <h2>Kush Rechner</h2>
+        <table>
+            <thead>
+                <tr><th>Kategorie</th><th>Artikel</th><th>Preis</th><th>Menge</th><th>Summe</th></tr></thead>
+            <tbody>
+                <tr><td>WESTEN</td><td>Weste</td><td>$6,500</td><td><input type='number' min='0' id='weste-count' value='0' onchange='calculateSum()'></td><td id='weste-sum'>$0</td></tr>
+                <tr><td></td><td>LV-Weste</td><td>$6,500</td><td><input type='number' min='0' id='lvweste-count' value='0' onchange='calculateSum()'></td><td id='lvweste-sum'>$0</td></tr>
+                <tr><td>REVOLVER</td><td>Revolver</td><td>$4,500</td><td><input type='number' min='0' id='revolver-count' value='0' onchange='calculateSum()'></td><td id='revolver-sum'>$0</td></tr>
+                <tr><td>MASCHINENGEWEHRE</td><td>Sturmgewehr</td><td>$5,500</td><td><input type='number' min='0' id='sturmgewehr-count' value='0' onchange='calculateSum()'></td><td id='sturmgewehr-sum'>$0</td></tr>
+                <tr><td></td><td>Sturmgewehr-Karabiner</td><td>$5,500</td><td><input type='number' min='0' id='sturmgewehr-karabiner-count' value='0' onchange='calculateSum()'></td><td id='sturmgewehr-karabiner-sum'>$0</td></tr>
+                <tr><td></td><td>Leichtes Maschinengewehr</td><td>$7,500</td><td><input type='number' min='0' id='leichtes-maschinengewehr-count' value='0' onchange='calculateSum()'></td><td id='leichtes-maschinengewehr-sum'>$0</td></tr>
+                <tr><td></td><td>Einzigartiges Maschinengewehr</td><td>$7,500</td><td><input type='number' min='0' id='einzigartiges-maschinengewehr-count' value='0' onchange='calculateSum()'></td><td id='einzigartiges-maschinengewehr-sum'>$0</td></tr>
+                <tr><td>SHOTGUNS</td><td>Schrotflinte</td><td>N/A</td><td><input type='number' min='0' id='schrotflinte-count' value='0' onchange='calculateSum()'></td><td id='schrotflinte-sum'>$0</td></tr>
+                <tr><td></td><td>Abgesägte Schrotflinte</td><td>N/A</td><td><input type='number' min='0' id='abgesaegte-schrotflinte-count' value='0' onchange='calculateSum()'></td><td id='abgesaegte-schrotflinte-sum'>$0</td></tr>
+                <tr><td>MUNITION</td><td>Revolver-Munition</td><td>$240</td><td><input type='number' min='0' id='revolver-munition-count' value='0' onchange='calculateSum()'></td><td id='revolver-munition-sum'>$0</td></tr>
+                <tr><td></td><td>AK-Munition</td><td>$90</td><td><input type='number' min='0' id='ak-munition-count' value='0' onchange='calculateSum()'></td><td id='ak-munition-sum'>$0</td></tr>
+                <tr><td></td><td>LMG-Munition</td><td>$85</td><td><input type='number' min='0' id='lmg-munition-count' value='0' onchange='calculateSum()'></td><td id='lmg-munition-sum'>$0</td></tr>
+                <tr><td></td><td>Shotgun-Munition</td><td>N/A</td><td><input type='number' min='0' id='shotgun-munition-count' value='0' onchange='calculateSum()'></td><td id='shotgun-munition-sum'>$0</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="autoTuningRechner" class="section">
+        <h2>Auto Tuning Rechner</h2>
+        <table>
+            <thead>
+                <tr><th>Kategorie</th><th>Level</th><th>Kosten</th><th>Eingabe</th><th>Summe</th></tr></thead>
+            <tbody>
+                <tr><td>MOTORTUNING</td><td>Level 1</td><td>$1,800,000</td><td><input type='number' min='0' id='motortuning1-count' value='0' onchange='calculateSum()'></td><td id='motortuning1-sum'>$0</td></tr>
+                <tr><td></td><td>Level 2</td><td>$3,600,000</td><td><input type='number' min='0' id='motortuning2-count' value='0' onchange='calculateSum()'></td><td id='motortuning2-sum'>$0</td></tr>
+                <tr><td></td><td>Level 3</td><td>$5,400,000</td><td><input type='number' min='0' id='motortuning3-count' value='0' onchange='calculateSum()'></td><td id='motortuning3-sum'>$0</td></tr>
+                <tr><td></td><td>Level 4</td><td>$7,200,000</td><td><input type='number' min='0' id='motortuning4-count' value='0' onchange='calculateSum()'></td><td id='motortuning4-sum'>$0</td></tr>
+                <tr><td>BREMSTUNING</td><td>Level 1</td><td>$450,000</td><td><input type='number' min='0' id='bremstuning1-count' value='0' onchange='calculateSum()'></td><td id='bremstuning1-sum'>$0</td></tr>
+                <tr><td></td><td>Level 2</td><td>$900,000</td><td><input type='number' min='0' id='bremstuning2-count' value='0' onchange='calculateSum()'></td><td id='bremstuning2-sum'>$0</td></tr>
+                <tr><td></td><td>Level 3</td><td>$1,350,000</td><td><input type='number' min='0' id='bremstuning3-count' value='0' onchange='calculateSum()'></td><td id='bremstuning3-sum'>$0</td></tr>
+                <tr><td>RADAUFHÄNGUNG</td><td>Level 1</td><td>$270,000</td><td><input type='number' min='0' id='radaufhaengung1-count' value='0' onchange='calculateSum()'></td><td id='radaufhaengung1-sum'>$0</td></tr>
+                <tr><td></td><td>Level 2</td><td>$540,000</td><td><input type='number' min='0' id='radaufhaengung2-count' value='0' onchange='calculateSum()'></td><td id='radaufhaengung2-sum'>$0</td></tr>
+                <tr><td></td><td>Level 3</td><td>$810,000</td><td><input type='number' min='0' id='radaufhaengung3-count' value='0' onchange='calculateSum()'></td><td id='radaufhaengung3-sum'>$0</td></tr>
+                <tr><td></td><td>Level 4</td><td>$1,080,000</td><td><input type='number' min='0' id='radaufhaengung4-count' value='0' onchange='calculateSum()'></td><td id='radaufhaengung4-sum'>$0</td></tr>
+                <tr><td>ÜBERTRAGUNG</td><td>Level 1</td><td>$360,000</td><td><input type='number' min='0' id='uebertragung1-count' value='0' onchange='calculateSum()'></td><td id='uebertragung1-sum'>$0</td></tr>
+                <tr><td></td><td>Level 2</td><td>$720,000</td><td><input type='number' min='0' id='uebertragung2-count' value='0' onchange='calculateSum()'></td><td id='uebertragung2-sum'>$0</td></tr>
+                <tr><td></td><td>Level 3</td><td>$1,080,000</td><td><input type='number' min='0' id='uebertragung3-count' value='0' onchange='calculateSum()'></td><td id='uebertragung3-sum'>$0</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        function switchTab(tabName) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(tabName).classList.add('active');
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+        }
+        function calculateSum() {
+            // Kush Rechner Computing
+            let westePrice = 6500, lvWestePrice = 6500, revolverPrice = 4500;
+            let sturmgewehrPrice = 5500, sturmgewehrKarabinerPrice = 5500, leichtesMaschinengewehrPrice = 7500, einzigartigesMaschinengewehrPrice = 7500;
+            let revolverMunitionPrice = 240, akMunitionPrice = 90, lmgMunitionPrice = 85;
+            let counts = [
+                { count: document.getElementById('weste-count').value, price: westePrice },
+                { count: document.getElementById('lvweste-count').value, price: lvWestePrice },
+                { count: document.getElementById('revolver-count').value, price: revolverPrice },
+                { count: document.getElementById('sturmgewehr-count').value, price: sturmgewehrPrice },
+                { count: document.getElementById('sturmgewehr-karabiner-count').value, price: sturmgewehrKarabinerPrice },
+                { count: document.getElementById('leichtes-maschinengewehr-count').value, price: leichtesMaschinengewehrPrice },
+                { count: document.getElementById('einzigartiges-maschinengewehr-count').value, price: einzigartigesMaschinengewehrPrice },
+                { count: document.getElementById('schrotflinte-count').value, price: 0 },
+                { count: document.getElementById('abgesaegte-schrotflinte-count').value, price: 0 },
+                { count: document.getElementById('revolver-munition-count').value, price: revolverMunitionPrice },
+                { count: document.getElementById('ak-munition-count').value, price: akMunitionPrice },
+                { count: document.getElementById('lmg-munition-count').value, price: lmgMunitionPrice },
+                { count: document.getElementById('shotgun-munition-count').value, price: 0 }
+            ];
+            counts.forEach((item, index) => {
+                let sum = item.count * item.price;
+                document.querySelectorAll('tbody tr')[index].querySelector('td:last-child').innerText = sum ? '$' + sum.toLocaleString() : '$0';
+            });
+
+            // Auto Tuning Rechner Computing
+            let motortuningPrices = [1800000, 3600000, 5400000, 7200000];
+            let bremstuningPrices = [450000, 900000, 1350000];
+            let radaufhaengungPrices = [270000, 540000, 810000, 1080000];
+            let uebertragungPrices = [360000, 720000, 1080000];
+            let tuningCounts = [
+                { count: document.getElementById('motortuning1-count').value, price: motortuningPrices[0] },
+                { count: document.getElementById('motortuning2-count').value, price: motortuningPrices[1] },
+                { count: document.getElementById('motortuning3-count').value, price: motortuningPrices[2] },
+                { count: document.getElementById('motortuning4-count').value, price: motortuningPrices[3] },
+                { count: document.getElementById('bremstuning1-count').value, price: bremstuningPrices[0] },
+                { count: document.getElementById('bremstuning2-count').value, price: bremstuningPrices[1] },
+                { count: document.getElementById('bremstuning3-count').value, price: bremstuningPrices[2] },
+                { count: document.getElementById('radaufhaengung1-count').value, price: radaufhaengungPrices[0] },
+                { count: document.getElementById('radaufhaengung2-count').value, price: radaufhaengungPrices[1] },
+                { count: document.getElementById('radaufhaengung3-count').value, price: radaufhaengungPrices[2] },
+                { count: document.getElementById('radaufhaengung4-count').value, price: radaufhaengungPrices[3] },
+                { count: document.getElementById('uebertragung1-count').value, price: uebertragungPrices[0] },
+                { count: document.getElementById('uebertragung2-count').value, price: uebertragungPrices[1] },
+                { count: document.getElementById('uebertragung3-count').value, price: uebertragungPrices[2] }
+            ];
+            tuningCounts.forEach((item, index) => {
+                let sum = item.count * item.price;
+                document.querySelectorAll('tbody tr')[index + 14].querySelector('td:last-child').innerText = sum ? '$' + sum.toLocaleString() : '$0';
+            });
+        }
+    </script>
+</body>
+</html>
